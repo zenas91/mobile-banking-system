@@ -6,4 +6,7 @@
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="register">Register</string>
     <string name="repeat_password">Repeat Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="date_of_birth">DOB DD.MM.YYYY</string>
 </resources>
