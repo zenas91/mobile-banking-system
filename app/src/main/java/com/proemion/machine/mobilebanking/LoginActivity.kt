@@ -11,20 +11,20 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-    }
 
-    fun clickRegisterLayout(view: View?) {
-        window.exitTransition = null
-        window.enterTransition = null
+        fab.setOnClickListener {
+            window.exitTransition = null
+            window.enterTransition = null
 
-        val options: ActivityOptions =
-            ActivityOptions.makeSceneTransitionAnimation(this, fab, fab.transitionName)
-        startActivity(Intent(this, RegisterActivity::class.java), options.toBundle())
-    }
+            val options: ActivityOptions =
+                ActivityOptions.makeSceneTransitionAnimation(this, fab, fab.transitionName)
+            startActivity(Intent(this, RegisterActivity::class.java), options.toBundle())
+        }
 
-    fun onClickLogin(view: View?){
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        bt_go.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }

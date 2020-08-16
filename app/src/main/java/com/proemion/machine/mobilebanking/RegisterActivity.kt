@@ -20,10 +20,8 @@ class RegisterActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             showEnterAnimation()
         }
-    }
 
-    fun clickBackToLogin(view: View?) {
-        animateRevealClose()
+        fab.setOnClickListener { animateRevealClose() }
     }
 
     fun animateRevealShow() {

@@ -20,4 +20,9 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="save_pdf">Save PDF</string>
+    <string name="search">Search</string>
+    <string name="to">To</string>
+    <string name="date_sample">12.10.2020</string>
+    <string name="from">From</string>
 </resources>
