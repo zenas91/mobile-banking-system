@@ -28,9 +28,6 @@ class AccountViewSet(viewsets.ModelViewSet):
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
-    filter_backends = (restfilters.DjangoFilterBackend, SearchFilter, OrderingFilter)
-    filter_fields = ('debit', 'credit', 'trans_type')
-    search_fields = ('ref', 'debit', 'credit')
 
 
 class SearchViewSet(viewsets.ReadOnlyModelViewSet):

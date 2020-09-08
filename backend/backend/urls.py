@@ -24,7 +24,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'addresses', views.AddressViewSet)
 router.register(r'accounts', views.AccountViewSet)
 router.register(r'transactions', views.TransactionViewSet)
-router.register(r'search', views.SearchViewSet)
+router.register(r'search', views.SearchViewSet, basename='search_view')
 
 urlpatterns = [
     url(r'^', include(router.urls)),

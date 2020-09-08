@@ -13,13 +13,13 @@ class Base(models.Model):
         abstract = True
 
 class Address(Base):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='address_owner')
     street = models.CharField(max_length=100, blank=False)
     housenumber = models.IntegerField(blank=True)
     postcode = models.IntegerField(blank=True)
     city = models.CharField(max_length=100, blank=False)
     state = models.CharField(max_length=100, blank=False)
     country = models.CharField(max_length=100, blank=False)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.street)
