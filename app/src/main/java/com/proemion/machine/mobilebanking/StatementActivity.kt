@@ -3,9 +3,7 @@ package com.proemion.machine.mobilebanking
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.proemion.machine.mobilebanking.StaticComponent.Data
 import kotlinx.android.synthetic.main.activity_statement.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -29,8 +27,6 @@ class StatementActivity : AppCompatActivity() {
         from_view.setOnClickListener { openDateRangePicker(dateFrom, dateTo) }
 
         to_view.setOnClickListener { openDateRangePicker(dateFrom, dateTo) }
-
-        Log.d("Spark", Data.sampleData)
 
     }
 

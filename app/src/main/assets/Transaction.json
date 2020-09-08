@@ -1,0 +1,38 @@
+{
+  "transactions": [
+    {
+      "ref": "RD453434F3",
+      "dot":1234567890000,
+      "amount": 1000,
+      "debit": 142342342,
+      "credit": 123456789,
+      "beforedebitbalance": 8000,
+      "afterdebitbalance": 7000,
+      "beforecreditbalance": 6000,
+      "aftercreditbalance": 7000
+    },
+    {
+      "ref": "RD453434F4",
+      "dot":1234567000000,
+      "amount": 2000,
+      "debit": 142342341,
+      "credit": 123456782,
+      "beforedebitbalance": 10000,
+      "afterdebitbalance": 8000,
+      "beforecreditbalance": 7000,
+      "aftercreditbalance": 9000
+    },
+    {
+      "ref": "RD453434F5",
+      "dot":1534567890000,
+      "amount": 3000,
+      "debit": 142342372,
+      "credit": 123456709,
+      "beforedebitbalance": 15000,
+      "afterdebitbalance": 12000,
+      "beforecreditbalance": 8000,
+      "aftercreditbalance": 11000
+    }
+
+  ]
+}
