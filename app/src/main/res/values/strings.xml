@@ -25,4 +25,13 @@
     <string name="to">To</string>
     <string name="date_sample">12.10.2020</string>
     <string name="from">From</string>
+    <string name="email">Email</string>
+    <string name="balance">Opening balance</string>
+    <string name="enable_overdraft">Enable Overdraft</string>
+    <string name="account_type">Account Type</string>
+
+    <string-array name="account_types">
+        <item>SAVINGS</item>
+        <item>CURRENT</item>
+    </string-array>
 </resources>
