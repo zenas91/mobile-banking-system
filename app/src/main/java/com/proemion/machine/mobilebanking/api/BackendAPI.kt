@@ -4,11 +4,13 @@
 package com.proemion.machine.mobilebanking.api
 
 import com.proemion.machine.mobilebanking.model.Account
+import com.proemion.machine.mobilebanking.model.Address
 import com.proemion.machine.mobilebanking.model.Login
 import com.proemion.machine.mobilebanking.model.User
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 
@@ -43,6 +45,27 @@ interface BackendAPI {
         @Field("overdraft") overdraft: Boolean,
         @Field("enabled") enabled: Boolean = true
     ): Call<Account?>
+
+
+    @FormUrlEncoded
+    @POST("/addresses/")
+    fun createAddress(
+        @Field("owner") owner: String,
+        @Field("street") street: String,
+        @Field("housenumber") houseNumber: Int,
+        @Field("postcode") postcode: Int,
+        @Field("city") city: String,
+        @Field("state") state: String,
+        @Field("country") country: String,
+        @Field("enabled") enabled: Boolean = true
+    ): Call<Address?>
+
+
+    @GET("/accounts")
+    fun getAllAccounts(): Call<Account?>?
+
+    //@GET("/transactions")
+    //fun getAllTransactions(): Call<ImageNameDAO?>?
 
 
 }

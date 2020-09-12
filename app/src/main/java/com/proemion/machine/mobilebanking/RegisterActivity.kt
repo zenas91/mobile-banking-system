@@ -11,6 +11,7 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.getOwnerUrl
 import com.proemion.machine.mobilebanking.api.Backend
 import com.proemion.machine.mobilebanking.model.Account
 import com.proemion.machine.mobilebanking.model.User
@@ -94,7 +95,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun createAccount(ownerID:Int){
-        val owner = "http://127.0.0.1:8000/users/$ownerID/"
+        val owner = getOwnerUrl(ownerID)
         val (iban, accNumber) = generateIBANAndAccNumber()
         val balance = et_balance.text.toString().toLong()
         val overdraft = switch_overdraft.isChecked

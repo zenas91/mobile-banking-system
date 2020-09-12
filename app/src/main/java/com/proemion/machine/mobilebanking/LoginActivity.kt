@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.proemion.machine.mobilebanking.ui.AddressActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -21,9 +22,17 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java), options.toBundle())
         }
 
+        val num = 1
         bt_go.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+
+            if(num == 1){
+                val intent = Intent(this, AddressActivity::class.java)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+
         }
     }
 
