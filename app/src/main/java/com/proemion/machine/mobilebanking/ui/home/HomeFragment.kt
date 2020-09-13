@@ -6,35 +6,44 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.proemion.machine.mobilebanking.MainActivity
 import com.proemion.machine.mobilebanking.R
 import com.proemion.machine.mobilebanking.StatementActivity
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_ACCOUNT_ID
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_ACC_BALANCE
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_ACC_NUM
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_EMAIL
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_IBAN
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_ID
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_NAME
+import com.proemion.machine.mobilebanking.ui.TransactionActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        //val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            //textView.text = it
-        })
-        return root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle? ): View? {
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        transaction_view.setOnClickListener {
+            val intent = Intent(requireContext(), TransactionActivity::class.java)
+            intent.putExtra(OWNER_ID, (activity as MainActivity).ownerID)
+            requireContext().startActivity(intent)
+        }
+
         statement_view.setOnClickListener {
+            val activity = activity as MainActivity
             val intent = Intent(requireContext(), StatementActivity::class.java)
+            intent.putExtra(OWNER_ID, activity.ownerID)
+            intent.putExtra(OWNER_ACCOUNT_ID, activity.ownerAccountId)
+            intent.putExtra(OWNER_NAME, activity.ownerName)
+            intent.putExtra(OWNER_EMAIL, activity.ownerEmail)
+            intent.putExtra(OWNER_IBAN, activity.ownerIBAN)
+            intent.putExtra(OWNER_ACC_NUM, activity.ownerACCNum)
+            intent.putExtra(OWNER_ACC_BALANCE, activity.ownerBalance)
             requireContext().startActivity(intent)
         }
     }

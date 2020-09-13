@@ -2,12 +2,20 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from account.models import *
+from django.contrib.auth.hashers import make_password
+from rest_framework.authtoken.models import Token
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name','username', 'email', 'password', 'last_login', 'is_staff', 'is_active', 'is_superuser')
+        #extra_kwargs = {'password': {'write_only': True, 'required': True}}
+
+        for user in User.objects.all():
+            Token.objects.get_or_create(user=user)
+        def validate_password(self, value: str) -> str:
+            return make_password(value)
 
 
 #fields = ('id' 'firstname', 'lastname', 'dob', 'username', 'email', 'password', 'created', 'modified', 'address', 'accounts', 'last_login')

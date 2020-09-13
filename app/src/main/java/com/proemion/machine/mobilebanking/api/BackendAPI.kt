@@ -3,21 +3,15 @@
  **************************************************************************************************/
 package com.proemion.machine.mobilebanking.api
 
-import com.proemion.machine.mobilebanking.model.Account
-import com.proemion.machine.mobilebanking.model.Address
-import com.proemion.machine.mobilebanking.model.Login
-import com.proemion.machine.mobilebanking.model.User
+import com.proemion.machine.mobilebanking.model.*
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface BackendAPI {
 
     @FormUrlEncoded
-    @POST("/auth/")
+    @POST("/api-token-auth/")
     fun authenticate(
         @Field("username") username: String,
         @Field("password") password: String
@@ -60,12 +54,46 @@ interface BackendAPI {
         @Field("enabled") enabled: Boolean = true
     ): Call<Address?>
 
+    @FormUrlEncoded
+    @POST("/transactions/")
+    fun processTransaction(
+        @Field("ref") ref: String,
+        @Field("amount") amount: Int,
+        @Field("debit") debit: String,
+        @Field("credit") credit: String,
+        @Field("balbeforedebit") balbeforedebit: Int?,
+        @Field("balafterdebit") balafterdebit: Int?,
+        @Field("balbeforecredit") balbeforecredit: Int?,
+        @Field("balaftercredit") balaftercredit: Int?,
+        @Field("enabled") enabled: Boolean = true
+    ): Call<Transaction?>
 
-    @GET("/accounts")
-    fun getAllAccounts(): Call<Account?>?
+    @FormUrlEncoded
+    @PUT("/accounts/{accountId}/")
+    fun updateAccount(
+        @Field("iban") iban: String,
+        @Field("number") number: String,
+        @Field("owner") owner: String,
+        @Field("act_type") accType: String,
+        @Field("balance") balance: Int,
+        @Field("overdraft") overdraft: Boolean,
+        @Field("enabled") enabled: Boolean = true,
+        @Path("accountId") accountId: Int
+    ): Call<Account?>
 
-    //@GET("/transactions")
-    //fun getAllTransactions(): Call<ImageNameDAO?>?
+    @GET("/addressSearch/")
+    fun getUserAddresses(@Query("owner") ownerId: Int): Call<AddressSearch>
 
+    @GET("/accountSearch/")
+    fun getUserAccounts(@Query("owner") ownerId: Int): Call<AccountSearch>
+
+    @GET("/accountSearch/")
+    fun getUserAccounts(@QueryMap options: Map<String, String>): Call<AccountSearch>
+
+    @GET("/users/{ownerId}")
+    fun getUser(@Path("ownerId") ownerId: Int): Call<User>
+
+    @GET("/search/")
+    fun getUserTransactions(@QueryMap options: Map<String, String>): Call<TransactionSearch>
 
 }

@@ -46,24 +46,61 @@
                     android:text="Savings Account"
                     style="@style/TextAppearance.MaterialComponents.Subtitle1" />
 
-                <TextView
-                    android:id="@+id/account_number"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/number"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_below="@+id/account_type"
-                    android:layout_alignStart="@+id/account_type"
-                    android:text="0123456789"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle2" />
+                    android:layout_alignStart="@+id/account_type">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_number"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                    <TextView
+                        android:id="@+id/account_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/iban"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/number"
+                    android:layout_alignStart="@+id/number">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/iban_number"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                    <TextView
+                        android:id="@+id/iban_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/account_number"
-                    android:layout_alignStart="@+id/account_number"
+                    android:layout_below="@+id/iban"
+                    android:layout_alignStart="@+id/iban"
                     android:layout_marginTop="10dp"
                     android:text="€"
-                    android:textSize="16dp"
+                    android:textSize="18sp"
                     style="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
                 <TextView
@@ -76,7 +113,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
                     android:text="100,000"
-                    android:textSize="20dp"
+                    android:textSize="18sp"
                     style="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
 

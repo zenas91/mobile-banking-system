@@ -22,7 +22,9 @@ from account import views
 router = routers.DefaultRouter() 
 router.register(r'users', views.UserViewSet)
 router.register(r'addresses', views.AddressViewSet)
+router.register(r'addressSearch', views.AddressSearchViewSet, basename='address_view')
 router.register(r'accounts', views.AccountViewSet)
+router.register(r'accountSearch', views.AccountSearchViewSet, basename='account_view')
 router.register(r'transactions', views.TransactionViewSet)
 router.register(r'search', views.SearchViewSet, basename='search_view')
 
@@ -30,4 +32,5 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
+    path('api-token-auth/', views.CustomAuthToken.as_view(), name='api-token-auth'),
 ]

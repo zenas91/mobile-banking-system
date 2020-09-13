@@ -10,6 +10,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <RelativeLayout
+        android:id="@+id/transaction_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
@@ -39,7 +40,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/transaction"
+            android:src="@drawable/ic_profile"
             android:layout_centerHorizontal="true"
             android:id="@+id/icon_2"/>
 
@@ -50,7 +51,7 @@
             android:layout_below="@+id/icon_2"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Transaction \n Details"/>
+            android:text="Profile"/>
 
     </RelativeLayout>
     <RelativeLayout

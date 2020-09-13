@@ -107,19 +107,17 @@ class RegisterActivity : AppCompatActivity() {
         call.enqueue(object : Callback<Account?> {
             override fun onResponse(call: Call<Account?>, response: Response<Account?>) {
                 if (response.isSuccessful) {
-                    val result = response.body()
-                    Toast.makeText(mContext, "Account ${result?.iban} was created successfully",
+                    Toast.makeText(mContext, "Account was created successfully",
                         Toast.LENGTH_SHORT).show()
                     clearFields()
+                    animateRevealClose()
                 } else {
                     Toast.makeText(mContext, "Unknown error! unable to create account",
                         Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<Account?>, t: Throwable) {
-                t.printStackTrace()
-            }
+            override fun onFailure(call: Call<Account?>, t: Throwable) { t.printStackTrace() }
         })
     }
 

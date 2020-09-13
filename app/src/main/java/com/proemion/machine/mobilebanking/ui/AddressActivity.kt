@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.proemion.machine.mobilebanking.MainActivity
 import com.proemion.machine.mobilebanking.R
 import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_ID
 import com.proemion.machine.mobilebanking.api.Backend
 import com.proemion.machine.mobilebanking.model.Account
 import com.proemion.machine.mobilebanking.model.Address
@@ -23,9 +24,8 @@ class AddressActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_address)
 
-        bt_address.setOnClickListener {
-            //(createAddress(4)
-        }
+        val ownerID = intent.getIntExtra(OWNER_ID, 0)
+        bt_address.setOnClickListener { (createAddress(ownerID)) }
 
     }
 
@@ -44,7 +44,6 @@ class AddressActivity : AppCompatActivity() {
         call.enqueue(object : Callback<Address?> {
             override fun onResponse(call: Call<Address?>, response: Response<Address?>) {
                 if (response.isSuccessful) {
-                    val result = response.body()
                     Toast.makeText(mContext, "Address saved successfully", Toast.LENGTH_SHORT)
                         .show()
                     et_street.text = null

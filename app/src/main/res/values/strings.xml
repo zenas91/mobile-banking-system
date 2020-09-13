@@ -44,4 +44,15 @@
     <string name="state">State</string>
     <string name="country">Country</string>
     <string name="save_address">Save Address</string>
+    <string name="error_invalid_password">Password is invalid</string>
+    <string name="error_field_required">Field cannot be empty</string>
+    <string name="account_number">Account Number:</string>
+    <string name="iban_number">IBAN:</string>
+    <string name="transaction">New Transaction</string>
+    <string name="account_holder">Account Holder</string>
+    <string name="beneficiary">Beneficiary\'s IBAN</string>
+    <string name="amount">Amount</string>
+    <string name="process">Process Transaction</string>
+    <string name="transaction_reference">Transaction Reference</string>
+    <string name="transaction_date">Transaction Date</string>
 </resources>
