@@ -20,6 +20,7 @@ import com.proemion.machine.mobilebanking.model.AccountSearch
 import com.proemion.machine.mobilebanking.model.AddressSearch
 import com.proemion.machine.mobilebanking.model.User
 import com.proemion.machine.mobilebanking.ui.AddressActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 import retrofit2.Call
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var ownerIBAN:String
     lateinit var ownerACCNum:String
     lateinit var ownerBalance:String
+    lateinit var username:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +63,13 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        nav_sign_out.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun getUserAccounts(ownerID:Int){
@@ -102,6 +111,7 @@ class MainActivity : AppCompatActivity() {
                     owner_name.text = name
                     owner_email.text = result?.email
                     ownerEmail = result?.email.toString()
+                    username = result?.username.toString()
                 }
             }
             override fun onFailure(call: Call<User>, t: Throwable) { t.printStackTrace() }

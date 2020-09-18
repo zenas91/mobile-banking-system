@@ -1,25 +1,27 @@
 package com.proemion.machine.mobilebanking
 
-import android.app.Activity
 import android.app.ActivityOptions
+import android.app.AlertDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig
 import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_ID
+import com.proemion.machine.mobilebanking.adapter.FingerprintUtils.isEnrolledFingerprintAvailable
+import com.proemion.machine.mobilebanking.adapter.FingerprintUtils.isHardwareSupported
 import com.proemion.machine.mobilebanking.api.Backend
-import com.proemion.machine.mobilebanking.model.Address
 import com.proemion.machine.mobilebanking.model.AddressSearch
 import com.proemion.machine.mobilebanking.model.Login
 import com.proemion.machine.mobilebanking.ui.AddressActivity
-import kotlinx.android.synthetic.main.activity_address.*
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.concurrent.Executors
+import androidx.biometric.BiometricPrompt
 
 class LoginActivity : AppCompatActivity() {
     val mContext = this
@@ -27,6 +29,26 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        if (!isHardwareSupported(this)){
+            AlertDialog.Builder(mContext)
+                .setTitle(getString(R.string.fingerprint_header))
+                .setMessage(getString(R.string.fingerprint_message))
+                .setPositiveButton(android.R.string.ok) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        if (!isEnrolledFingerprintAvailable(this)){
+            AlertDialog.Builder(mContext)
+                .setTitle(getString(R.string.fingerprint_header))
+                .setMessage(getString(R.string.fingerprint_enrolment))
+                .setPositiveButton(android.R.string.ok) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
 
         fab.setOnClickListener {
             window.exitTransition = null
@@ -81,7 +103,10 @@ class LoginActivity : AppCompatActivity() {
                     response: Response<Login?> ) {
                     if (response.isSuccessful) {
                         val res: Login? = response.body()
-                        res?.id?.let { checkAddress(it) }
+                        biometricLogin(res?.id!!)
+                    }
+                    else{
+                        Toast.makeText(mContext, "Login failed, please check your credentials", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -91,6 +116,46 @@ class LoginActivity : AppCompatActivity() {
             })
         }
     }
+
+
+    private fun biometricLogin(ownerID:Int) {
+
+        /**Create a thread pool with a single thread */
+        val newExecutor = Executors.newSingleThreadExecutor()
+
+        /**Start listening for authentication events */
+        val myBiometricPrompt = BiometricPrompt(this, newExecutor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override
+                        /**onAuthenticationError is called when a fatal error occurs */
+                        /**onAuthenticationError is called when a fatal error occurs */
+                fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                    if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
+                    } else {
+
+                    }
+                }
+                /**onAuthenticationSucceeded is called when a fingerprint is matched successfully */
+                /**onAuthenticationSucceeded is called when a fingerprint is matched successfully */
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+
+                    checkAddress(ownerID)
+                }
+            })
+        /** This creates a BiometricPrompt instance */
+        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+            /**customize the dialog*/
+            .setTitle("Fingerprint Authentication")
+            .setDescription("")
+            .setNegativeButtonText("Cancel")
+            .build()
+
+        myBiometricPrompt.authenticate(promptInfo)
+
+    }
+
 
     private fun checkAddress(ownerID:Int){
         val call: Call<AddressSearch> = Backend.getRetrofitApi1()!!.getUserAddresses(ownerID)

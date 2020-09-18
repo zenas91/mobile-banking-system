@@ -16,6 +16,8 @@ import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_EMA
 import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_IBAN
 import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_ID
 import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_NAME
+import com.proemion.machine.mobilebanking.StaticComponent.StaticConfig.OWNER_USERNAME
+import com.proemion.machine.mobilebanking.ui.ProfileActivity
 import com.proemion.machine.mobilebanking.ui.TransactionActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -28,14 +30,25 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val activity = activity as MainActivity
         transaction_view.setOnClickListener {
             val intent = Intent(requireContext(), TransactionActivity::class.java)
-            intent.putExtra(OWNER_ID, (activity as MainActivity).ownerID)
+            intent.putExtra(OWNER_ID, activity.ownerID)
+            requireContext().startActivity(intent)
+        }
+
+        profile_view.setOnClickListener {
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            intent.putExtra(OWNER_ID, activity.ownerID)
+            intent.putExtra(OWNER_ACCOUNT_ID, activity.ownerAccountId)
+            intent.putExtra(OWNER_NAME, activity.ownerName)
+            intent.putExtra(OWNER_EMAIL, activity.ownerEmail)
+            intent.putExtra(OWNER_USERNAME, activity.username)
             requireContext().startActivity(intent)
         }
 
         statement_view.setOnClickListener {
-            val activity = activity as MainActivity
+
             val intent = Intent(requireContext(), StatementActivity::class.java)
             intent.putExtra(OWNER_ID, activity.ownerID)
             intent.putExtra(OWNER_ACCOUNT_ID, activity.ownerAccountId)

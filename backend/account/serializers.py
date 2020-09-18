@@ -12,13 +12,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'first_name', 'last_name','username', 'email', 'password', 'last_login', 'is_staff', 'is_active', 'is_superuser')
         #extra_kwargs = {'password': {'write_only': True, 'required': True}}
 
-        for user in User.objects.all():
-            Token.objects.get_or_create(user=user)
-        def validate_password(self, value: str) -> str:
-            return make_password(value)
+    for user in User.objects.all():
+        Token.objects.get_or_create(user=user)
+    def validate_password(self, value: str) -> str:
+        return make_password(value)
 
-
-#fields = ('id' 'firstname', 'lastname', 'dob', 'username', 'email', 'password', 'created', 'modified', 'address', 'accounts', 'last_login')
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
 
 
 class AddressSerializer(serializers.HyperlinkedModelSerializer):

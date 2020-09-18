@@ -11,6 +11,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from django.contrib.auth.hashers import make_password, check_password
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -20,8 +21,6 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        print("I was here")
-        print(token)
         return Response({
             'token': token.key,
             'id': user.pk,
@@ -33,6 +32,8 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     ordering_fields = ('username', 'email')
+    hashed_pwd = make_password("plain_text")
+    check_password("plain_text",hashed_pwd) 
 
 
 class AddressViewSet(viewsets.ModelViewSet):

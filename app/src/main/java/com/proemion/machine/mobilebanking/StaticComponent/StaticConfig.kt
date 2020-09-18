@@ -13,6 +13,7 @@ object StaticConfig {
     const val OWNER_IBAN = "Owner_IBAN"
     const val OWNER_ACC_NUM = "Owner_Account_Number"
     const val OWNER_ACC_BALANCE = "Owner_Account_Balance"
+    const val OWNER_USERNAME = "Owner_Username"
 
     fun getOwnerUrl(ownerId: Int):String {
         return "http://10.0.2.2:8000/users/$ownerId/"

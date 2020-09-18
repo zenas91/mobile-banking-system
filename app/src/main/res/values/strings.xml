@@ -36,7 +36,7 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="user_address">Account Owner Address</string>
+    <string name="user_address">Account Holder Address</string>
     <string name="street">Street</string>
     <string name="postcode">Postal Code</string>
     <string name="number">No.</string>
@@ -55,4 +55,9 @@
     <string name="process">Process Transaction</string>
     <string name="transaction_reference">Transaction Reference</string>
     <string name="transaction_date">Transaction Date</string>
+    <string name="holder_profile">Account Holder Profile</string>
+
+    <string name="fingerprint_header">Fingerprint Support</string>
+    <string name="fingerprint_message">This device does not support fingerprint authentication. This app will not function effectively</string>
+    <string name="fingerprint_enrolment">There is no enrolled fingerprint. This app will not function effectively without fingerprint authentication</string>
 </resources>
