@@ -16,14 +16,14 @@ object StaticConfig {
     const val OWNER_USERNAME = "Owner_Username"
 
     fun getOwnerUrl(ownerId: Int):String {
-        return "http://10.0.2.2:8000/users/$ownerId/"
+        return "http://ec2-3-92-202-42.compute-1.amazonaws.com/users/$ownerId/"
     }
 
     fun getAccountUrl(accountId: Int):String {
-        return "http://10.0.2.2:8000/accounts/$accountId/"
+        return "http://ec2-3-92-202-42.compute-1.amazonaws.com/accounts/$accountId/"
     }
 
     fun getAccountIdFromURL(url:String):Int {
-        return url.replace("http://10.0.2.2:8000/accounts/", "").replace("/", "").toInt()
+        return url.replace("http://ec2-3-92-202-42.compute-1.amazonaws.com/accounts/", "").replace("/", "").toInt()
     }
 }

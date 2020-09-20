@@ -186,7 +186,7 @@ class TransactionActivity : AppCompatActivity() {
                         credit = result?.accounts?.get(0)?.id?.let { getAccountUrl(it) }
                         val ownerID = result?.accounts?.get(0)?.owner
                         val res = ownerID?.
-                                    replace("http://10.0.2.2:8000/users/", "")?.
+                                    replace("http://ec2-3-92-202-42.compute-1.amazonaws.com/users/", "")?.
                                     replace("/", "")
                         res?.toInt()?.let { getUser(it) }
                         creditAccount = result?.accounts?.get(0)

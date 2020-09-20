@@ -7,19 +7,23 @@ from rest_framework.authtoken.models import Token
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'first_name', 'last_name','username', 'email', 'password', 'last_login', 'is_staff', 'is_active', 'is_superuser')
-        #extra_kwargs = {'password': {'write_only': True, 'required': True}}
+  def create(self, validated_data):
+    user = User(
+        first_name=validated_data['first_name'],
+		last_name=validated_data['last_name'],
+        username=validated_data['username'],
+		email=validated_data['email']
+    )
+    user.set_password(validated_data['password'])
+    user.save()
+    return user
 
-    for user in User.objects.all():
-        Token.objects.get_or_create(user=user)
-    def validate_password(self, value: str) -> str:
-        return make_password(value)
+  class Meta:
+    model = User
+    fields = ('id', 'first_name', 'last_name','username', 'email', 'password', 'last_login', 'is_staff', 'is_active', 'is_superuser')
+    #fields = ('url', 'username', 'password', 'email', 'groups')
+    extra_kwargs = {'password': {'write_only': True}}
 
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
 
 
 class AddressSerializer(serializers.HyperlinkedModelSerializer):

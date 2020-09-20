@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -111,6 +112,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure( call: Call<Login?>, t: Throwable ) {
+                    Log.d("Spark", t.toString())
                     Toast.makeText(this@LoginActivity, "Fail", Toast.LENGTH_SHORT).show()
                 }
             })

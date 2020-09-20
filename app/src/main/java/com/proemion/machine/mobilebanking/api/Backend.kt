@@ -11,7 +11,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class Backend {
     companion object{
-        private const val BASE_URL = "http://10.0.2.2:8000"
+        private const val BASE_URL = "http://ec2-3-92-202-42.compute-1.amazonaws.com/"
         private val httpClient= OkHttpClient.Builder().build()
 
         private val retrofitBuilder1 = Retrofit.Builder().baseUrl(BASE_URL)
